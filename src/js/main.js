@@ -294,12 +294,16 @@ function initDiagnosticoTabs() {
     const tabsContainer = document.querySelector('.tabs-diagnostico');
     if (!tabsContainer) return;
 
+    const section = document.getElementById('diagnostico-da-nmosd');
     const navButtons = tabsContainer.querySelectorAll('.tabs-diagnostico-nav-item button');
     const tabItems = tabsContainer.querySelectorAll('.tabs-diagnostico-item');
 
     // Adiciona event listeners aos botões de navegação
     navButtons.forEach((button, index) => {
         button.addEventListener('click', () => {
+            // Mede altura antes da mudança
+            const sectionHeightBefore = section.offsetHeight;
+            
             // Remove classe active de todos os botões
             navButtons.forEach(btn => btn.classList.remove('active'));
             
@@ -313,6 +317,38 @@ function initDiagnosticoTabs() {
             if (tabItems[index]) {
                 tabItems[index].classList.add('active');
             }
+            
+            // Aguarda a transição do conteúdo e então atualiza os triggers do ScrollTrigger
+            setTimeout(() => {
+                const sectionHeightAfter = section.offsetHeight;
+                const sectionHeightDiff = sectionHeightAfter - sectionHeightBefore;
+                
+                if (window.ScrollTrigger) {
+                    // Se a diferença de altura for significativa, recria os triggers para novas posições
+                    if (Math.abs(sectionHeightDiff) > 100) {
+                        // Para mudanças grandes na seção diagnóstico, recria apenas as seções posteriores
+                        if (typeof window.recreateAnimationsAfterDiagnostico === 'function') {
+                            window.recreateAnimationsAfterDiagnostico();
+                        } else if (typeof window.recreateAnimations === 'function') {
+                            window.recreateAnimations();
+                        } else {
+                            // Fallback: limpa e recria manualmente
+                            if (typeof window.clearAllTriggers === 'function') {
+                                window.clearAllTriggers();
+                            }
+                            
+                            setTimeout(() => {
+                                if (typeof window.initAnimations === 'function') {
+                                    window.initAnimations();
+                                }
+                            }, 100);
+                        }
+                    } else {
+                        // Para mudanças pequenas, apenas atualiza posições
+                        ScrollTrigger.update();
+                    }
+                }
+            }, 400); // Delay suficiente para as transições CSS completarem
         });
     });
 }

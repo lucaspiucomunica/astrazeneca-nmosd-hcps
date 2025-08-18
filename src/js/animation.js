@@ -1,6 +1,30 @@
 // Animações do site NMOSD com GSAP e ScrollTrigger
 (function () {
   const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  // Sistema para controlar seções já animadas
+  window.animatedSections = window.animatedSections || new Set();
+  
+  // Função para marcar seção como animada
+  function markSectionAsAnimated(sectionId) {
+    window.animatedSections.add(sectionId);
+  }
+  
+  // Função para verificar se seção já foi animada
+  function isSectionAnimated(sectionId) {
+    return window.animatedSections.has(sectionId);
+  }
+  
+  // Função para definir elementos como visíveis sem animar
+  function setElementsVisible(elements) {
+    if (!elements) return;
+    const elementsArray = Array.isArray(elements) ? elements : [elements];
+    elementsArray.forEach(el => {
+      if (el) {
+        gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
+      }
+    });
+  }
 
   // Detecta se há uma âncora na URL
   function hasAnchor() {
@@ -582,7 +606,7 @@
     }
   }
 
-  function runDiagnosticoNmosdAnimations() {
+  function runDiagnosticoNmosdAnimations(skipAnimation = false) {
     const section = document.getElementById('diagnostico-da-nmosd');
     if (!section) return;
 
@@ -601,7 +625,7 @@
     const tabsNav = rightCol ? rightCol.querySelector('.tabs-diagnostico-nav') : null;
     const tabsContainer = rightCol ? rightCol.querySelector('.tabs-diagnostico-container') : null;
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || skipAnimation) {
       if (title) title.style.opacity = '1';
       if (paragraph) paragraph.style.opacity = '1';
       listItems.forEach(item => item.style.opacity = '1');
@@ -680,10 +704,17 @@
     const leftColumn = columns[0] || null;
     const rightColumn = columns[1] || null;
 
+    // Se já foi animada, apenas torna visível sem reanimar
+    if (isSectionAnimated('tratamento-da-nmosd')) {
+      setElementsVisible([title, leftColumn, rightColumn]);
+      return;
+    }
+
     if (prefersReducedMotion) {
       if (title) gsap.set(title, { opacity: 1, y: 0 });
       if (leftColumn) gsap.set(leftColumn, { opacity: 1, y: 0 });
       if (rightColumn) gsap.set(rightColumn, { opacity: 1, y: 0 });
+      markSectionAsAnimated('tratamento-da-nmosd');
       return;
     }
 
@@ -702,6 +733,7 @@
         toggleActions: 'play none play none',
         once: true,
       },
+      onComplete: () => markSectionAsAnimated('tratamento-da-nmosd')
     });
 
     // Sequência da animação: título -> colunas de baixo para cima
@@ -717,6 +749,7 @@
 
     if (shouldAnimate) {
       tl.delay(0.4);
+      tl.call(() => markSectionAsAnimated('tratamento-da-nmosd'));
     }
   }
 
@@ -741,6 +774,12 @@
     // Imagem da coluna direita
     const rightImage = rightColumn ? rightColumn.querySelector('.content-image') : null;
 
+    // Se já foi animada, apenas torna visível sem reanimar
+    if (isSectionAnimated('fisiopatologia-da-nmosd')) {
+      setElementsVisible([title, subtitle, ...paragraphs, cardWithChart, button, rightImage]);
+      return;
+    }
+
     if (prefersReducedMotion) {
       if (title) gsap.set(title, { opacity: 1, y: 0 });
       if (subtitle) gsap.set(subtitle, { opacity: 1, y: 0 });
@@ -748,6 +787,7 @@
       if (cardWithChart) gsap.set(cardWithChart, { opacity: 1, x: 0 });
       if (button) gsap.set(button, { opacity: 1, y: 0 });
       if (rightImage) gsap.set(rightImage, { opacity: 1, y: 0 });
+      markSectionAsAnimated('fisiopatologia-da-nmosd');
       return;
     }
 
@@ -784,6 +824,9 @@
     // Imagem da direita (após o botão)
     if (rightImage) tl.to(rightImage, { opacity: 1, y: 0, duration: 0.6 }, '>-0.1');
 
+    // Adiciona callback para marcar como animada
+    tl.call(() => markSectionAsAnimated('fisiopatologia-da-nmosd'));
+
     if (shouldAnimate) {
       tl.delay(0.4);
     }
@@ -805,10 +848,17 @@
     const rightColumn = section.querySelector('.w-full:last-child');
     const image = rightColumn ? rightColumn.querySelector('.content-img') : null;
 
+    // Se já foi animada, apenas torna visível sem reanimar
+    if (isSectionAnimated('portal-medico')) {
+      setElementsVisible([title, button, image]);
+      return;
+    }
+
     if (prefersReducedMotion) {
       if (title) gsap.set(title, { opacity: 1, y: 0 });
       if (button) gsap.set(button, { opacity: 1, y: 0 });
       if (image) gsap.set(image, { opacity: 1, y: 0 });
+      markSectionAsAnimated('portal-medico');
       return;
     }
 
@@ -827,6 +877,7 @@
         toggleActions: 'play none play none',
         once: true,
       },
+      onComplete: () => markSectionAsAnimated('portal-medico')
     });
 
     // Sequência: título -> botão -> imagem
@@ -836,6 +887,7 @@
 
     if (shouldAnimate) {
       tl.delay(0.4);
+      tl.call(() => markSectionAsAnimated('portal-medico'));
     }
   }
 
@@ -852,10 +904,17 @@
     const paragraph = contentBlock ? contentBlock.querySelector('p') : null;
     const button = contentBlock ? contentBlock.querySelector('.btn') : null;
 
+    // Se já foi animada, apenas torna visível sem reanimar
+    if (isSectionAnimated('conteudo-exclusivo')) {
+      setElementsVisible([title, paragraph, button]);
+      return;
+    }
+
     if (prefersReducedMotion) {
       if (title) gsap.set(title, { opacity: 1, y: 0 });
       if (paragraph) gsap.set(paragraph, { opacity: 1, y: 0 });
       if (button) gsap.set(button, { opacity: 1, y: 0 });
+      markSectionAsAnimated('conteudo-exclusivo');
       return;
     }
 
@@ -874,6 +933,7 @@
         toggleActions: 'play none play none',
         once: true,
       },
+      onComplete: () => markSectionAsAnimated('conteudo-exclusivo')
     });
 
     // Sequência: título -> parágrafo -> botão
@@ -883,6 +943,7 @@
 
     if (shouldAnimate) {
       tl.delay(0.4);
+      tl.call(() => markSectionAsAnimated('conteudo-exclusivo'));
     }
   }
 
@@ -893,7 +954,7 @@
       runHeroAnimations();
       runOQueEAnimations();
       runEpidemiologiaAnimations();
-      runDiagnosticoNmosdAnimations();
+      runDiagnosticoNmosdAnimations(false); // false = anima normalmente
       runTratamentoNmosdAnimations();
       runFisiopatologiaNmosdAnimations();
       runSintomasAnimations();
@@ -914,6 +975,56 @@
       runAll();
     }
   }
+  
+  // Função para limpar todos os triggers existentes
+  function clearAllTriggers() {
+    if (window.ScrollTrigger) {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    }
+  }
+  
+  // Função para recriar animações após mudança nas tabs de diagnóstico
+  function recreateAnimationsAfterDiagnostico() {
+    // Limpa todos os triggers
+    clearAllTriggers();
+    
+    // Aguarda um pouco e então recria as animações
+    setTimeout(() => {
+      // Recria todas as seções, mas pula a animação da seção diagnóstico
+      runHeroAnimations();
+      runOQueEAnimations();
+      runEpidemiologiaAnimations();
+      runDiagnosticoNmosdAnimations(true); // Passa true para pular animação
+      runTratamentoNmosdAnimations();
+      runFisiopatologiaNmosdAnimations();
+      runSintomasAnimations();
+      runNmosdEscleroseAnimations();
+      runPortalMedicoAnimations();
+      runConteudoExclusivoAnimations();
+      
+      // Refresh suave após recriar
+      if (window.ScrollTrigger && typeof ScrollTrigger.refresh === 'function') {
+        ScrollTrigger.refresh();
+      }
+    }, 100);
+  }
+  
+  // Função para recriar animações (versão completa)
+  function recreateAnimations() {
+    // Limpa triggers antigos primeiro
+    clearAllTriggers();
+    
+    // Aguarda um pouco e então recria
+    setTimeout(() => {
+      initAnimations();
+    }, 100);
+  }
+  
+  // Expõe as funções globalmente
+  window.initAnimations = initAnimations;
+  window.recreateAnimations = recreateAnimations;
+  window.recreateAnimationsAfterDiagnostico = recreateAnimationsAfterDiagnostico;
+  window.clearAllTriggers = clearAllTriggers;
 
   // Inicializa quando o documento estiver pronto
   if (document.readyState === 'complete') {
