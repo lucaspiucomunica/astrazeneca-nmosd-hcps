@@ -1,0 +1,831 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://use.typekit.net/lfi3mby.css");
+
+@font-face {
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+    html {
+        @apply 
+        scroll-smooth antialiased overflow-x-hidden
+    }
+
+    body {
+        @apply 
+        font-body 
+        text-neutrals-700
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply 
+        font-display font-semibold
+    }
+
+    h2 {
+        @apply
+        sm:text-4xl text-3xl text-primary-500
+    }
+
+    h3 {
+        @apply text-2xl
+    }
+
+    .container {
+        @apply
+        lg:px-10 sm:px-6 px-4
+    }
+    
+}
+
+@layer components {
+    /* Botões */
+
+    .btn {
+        @apply
+        inline-flex items-center gap-3
+        px-6 py-4 rounded-full
+        bg-secondary-50
+        text-secondary-500 ml:text-lg text-base
+        font-semibold font-display
+        transition-all duration-300
+        hover:bg-secondary-100
+    }
+
+    .btn svg {
+        @apply
+        *:fill-secondary-500
+    }
+
+    .btn.btn-primary {
+        @apply
+        bg-primary-500
+        text-primary-50
+        hover:bg-primary-600
+    }
+
+    .btn.btn-primary svg {
+        @apply
+        *:fill-primary-50
+    }
+
+    .btn.btn-secondary {
+        @apply
+        bg-secondary-400
+        text-secondary-50
+        hover:bg-secondary-500
+    }
+
+    .btn.btn-secondary svg {
+        @apply
+        *:fill-secondary-50
+    }
+
+    /* Conteúdo */
+
+    .content-text h2 {
+        @apply
+        mb-6
+    }
+
+    .content-text h3 {
+        @apply
+        mb-4
+    }
+
+    .content-text p {
+        @apply
+        mb-4 ml:text-lg text-base
+    }
+
+    .content-text.content-text-xs p {
+        @apply
+        text-xs
+    }
+
+    .content-text *:last-child {
+        @apply
+        mb-0
+    }
+
+    .content-text strong {
+        @apply
+        font-bold
+    }
+
+    .content-text.content-text-light > * {
+        @apply
+        text-neutrals-50
+    }
+
+    .content-text-title-color h3,
+    .content-text-title-color h4 {
+        @apply
+        text-primary-500
+    }
+
+    .content-image img {
+        @apply
+        w-full h-auto
+    }
+
+    .content-image.content-image-rounded {
+        @apply
+        rounded-2xl overflow-hidden
+    }
+
+    .content-image.content-image-border {
+        @apply
+        border border-neutrals-200
+    }
+
+    .content-icon {
+        @apply
+        w-20 h-20 min-w-20 min-h-20
+        bg-content-icon bg-cover bg-center
+        flex items-center justify-center
+        rounded-full overflow-hidden
+    }
+
+    .content-icon svg {
+        @apply
+        w-12 h-12 min-w-12 min-h-12
+        *:fill-neutrals-50
+    }
+
+    /* Seções */
+
+    /* Hero */
+
+    .hero-section .hero-content {
+        @apply
+        relative overflow-hidden;
+        height: calc(100vh - var(--hero-menu-height, 80px));
+    }
+
+    .hero-content-bg {
+        @apply
+        absolute inset-0 w-full h-full
+        bg-hero bg-cover bg-center;
+    }
+
+    .hero-section .hero-content .container {
+        @apply
+        relative z-10;
+        height: 100%;
+    }
+
+    .hero-menu {
+        @apply
+        bg-secondary-400 overflow-hidden
+        transition-all duration-300 ease-in-out;
+        --hero-menu-height: auto;
+    }
+
+    .hero-content .hero-content-text {
+        @apply
+        flex flex-col items-start
+        md:py-20 py-6 md:px-0 px-6 md:mt-0 mt-6
+        md:bg-transparent bg-primary-500/80 md:backdrop-blur-none backdrop-blur-sm md:rounded-none rounded-2xl
+    }
+
+    .hero-content .hero-content-text img {
+        @apply
+        w-full md:max-w-[344px] max-w-[244px] h-auto md:mb-6 mb-2
+    }
+
+    .hero-content .hero-content-text p {
+        @apply
+        text-white font-semilight font-display md:text-2xl text-xl
+        md:max-w-[310px] max-w-full
+    }
+
+    .hero-menu .hero-content-menu {
+        @apply
+        relative
+    }
+
+    .hero-menu .hero-content-menu .hero-content-menu-list {
+        @apply
+        flex items-center justify-center gap-1 flex-nowrap
+        py-3
+        transition-all duration-300 ease-in-out
+    }
+
+    .hero-menu .hero-content-menu .hero-content-menu-list.menu-scrollable {
+        @apply
+        justify-start overflow-x-auto
+        scrollbar-hide
+        scroll-smooth
+    }
+
+    /* Breakpoint para telas <= 1260px */
+    @media (max-width: 1260px) {
+        .hero-menu .hero-content-menu .hero-content-menu-list {
+            @apply
+            justify-start
+        }
+    }
+
+    .hero-menu .hero-content-menu .hero-content-menu-list li a {
+        @apply
+        inline-flex
+        text-white text-center font-semibold font-display
+        px-3 py-1 rounded-full whitespace-nowrap
+    }
+
+    .hero-menu .hero-content-menu .hero-content-menu-list li a.active {
+        @apply
+        bg-secondary-500
+    }
+
+    /* Indicadores de gradiente para scroll horizontal */
+    .menu-gradient {
+        @apply
+        absolute top-0 bottom-0 z-10
+        w-8 pointer-events-none opacity-0
+        transition-all duration-300 ease-in-out
+    }
+
+    .menu-gradient.visible {
+        @apply
+        opacity-100
+    }
+
+    .menu-gradient--left {
+        @apply
+        left-0
+        bg-gradient-to-r from-secondary-400 to-transparent
+    }
+
+    .menu-gradient--right {
+        @apply
+        right-0
+        bg-gradient-to-l from-secondary-400 to-transparent
+    }
+
+    /* Espaçador para menu fixo */
+    .menu-spacer {
+        @apply
+        w-full
+        transition-all duration-300 ease-in-out
+    }
+
+    /* O que é NMOSD */
+
+    .section-o-que-e-nmosd {
+        @apply
+        psection
+    }
+
+    .section-o-que-e-nmosd .block-guia {
+        /* Usa as classes base reutilizáveis - versão escura */
+    }
+
+    /* Epidemiologia */
+
+    .section-epidemiologia-da-nmosd {
+        @apply
+        psection
+        bg-primary-50
+    }
+
+    /* Sintomas */
+
+    .section-sintomas-da-nmosd {
+        @apply
+        psection-top
+    }
+
+    .section-sintomas-da-nmosd .block-como-afeta {
+        /* Usa as classes base reutilizáveis - versão escura */
+    }
+
+    .section-sintomas-da-nmosd .block-video-sintomas-desafios {
+        /* Usa as classes base reutilizáveis - versão clara */
+    }
+
+    /* Cards */
+
+    .card-primary .card-primary-content {
+        @apply
+        flex gap-4
+    }
+
+    .card-primary.card-primary--row .card-primary-content {
+        @apply
+        flex-row items-center
+    }
+
+    .card-primary.card-primary--col .card-primary-content {
+        @apply
+        flex-col items-center
+    }
+
+    .card-primary.card-primary--col .content-text {
+        @apply
+        text-center
+    }
+
+    .card-primary.card-primary--row .content-text {
+        @apply
+        text-left
+    }
+
+    .card-primary .content-text h3 {
+        @apply
+        sm:text-2xl text-xl font-semilight
+    }
+
+    .card-list.card-list--col {
+        @apply
+        flex flex-col gap-4
+    }
+
+    /* Tabs */
+
+    .block-como-afeta-tabs .tab-content {
+        @apply
+        flex flex-col
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item {
+        @apply
+        flex flex-row items-stretch gap-3
+        p-4
+        bg-secondary-400 rounded-2xl
+        text-neutrals-50
+        transition-all duration-200 ease-in-out
+        relative
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item:not(.is-inactive) {
+        @apply
+        cursor-default
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item.is-inactive {
+        @apply
+        cursor-pointer
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .progress-bar {
+        @apply
+        w-1 min-w-1 bg-secondary-300
+        relative
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .progress-bar .progress-bar-item {
+        @apply
+        absolute top-0 left-0 w-full h-[0%] bg-secondary-500
+        transition-all duration-75 ease-linear
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content {
+        @apply
+        flex flex-col w-full
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-content-title {
+        @apply
+        flex flex-row items-center justify-between gap-3 pr-2
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-content-title h4 {
+        @apply
+        text-xl
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-content-title button {
+        @apply
+        hidden
+        flex flex-row items-center
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-content-title button svg {
+        @apply
+        *:fill-neutrals-50
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item.is-inactive .tab-item-content .tab-item-content-title button {
+        @apply
+        inline-flex
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-list {
+        @apply
+        flex flex-col gap-3
+        overflow-hidden
+        transition-all duration-500 ease-in-out
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-list .tab-item-list-item {
+        @apply
+        flex flex-row items-center gap-2
+        first:pt-3
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-list .tab-item-list-item ul {
+        @apply
+        list-disc list-inside
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-list .tab-item-list-item .tab-item-list-item-icon svg {
+        @apply
+        *:fill-neutrals-50
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-content .tab-item-list .tab-item-list-item .tab-item-list-item-text {
+        @apply
+        ml:text-lg sm:text-base text-sm
+    }
+
+    .block-como-afeta-tabs .tab-image {
+        @apply
+        rounded-2xl overflow-hidden
+        relative
+    }
+
+    .block-como-afeta-tabs .tab-image .tab-image-item {
+        @apply
+        transition-opacity duration-300 ease-in-out
+    }
+
+    .block-como-afeta-tabs .tab-image .tab-image-item:not([style*="display: block"]) {
+        @apply
+        opacity-0 absolute top-0 left-0
+    }
+
+    .block-como-afeta-tabs .tab-image .tab-image-item[style*="display: block"] {
+        @apply
+        opacity-100 relative
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item.is-inactive {
+        @apply
+        bg-transparent
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item.is-inactive .progress-bar {
+        @apply
+        invisible
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item .tab-item-line {
+        @apply
+        w-full h-[1px] bg-primary-200
+        absolute bottom-0 left-0
+        opacity-0
+    }
+
+    .block-como-afeta-tabs .tab-content .tab-item.is-inactive .tab-item-line {
+        @apply
+        opacity-100
+    }
+
+    /* Classes reutilizáveis para blocos com fundo e decoração */
+    
+    .block-decorative-base {
+        @apply
+        relative
+        rounded-2xl overflow-hidden
+        py-10 ml:px-10 sm:px-6 px-4
+    }
+
+    .block-decorative-base .block-decorative-content {
+        @apply
+        relative z-20
+    }
+
+    .block-decorative-base .textura-1 {
+        @apply
+        absolute top-0 left-0 w-full h-full z-10
+        bg-textura-1 bg-cover bg-center mix-blend-multiply
+    }
+
+    .block-decorative-base .shape-for-blur-1 {
+        @apply
+        absolute top-[140px] left-[52%] z-0
+    }
+
+    .block-decorative-base .shape-for-blur-1 img {
+        @apply
+        w-auto h-auto min-w-[1144px] blur-[200px]
+    }
+
+    /* Variações de fundo */
+    .block-decorative-base.block-decorative--dark {
+        @apply
+        bg-primary-500
+    }
+
+    .block-decorative-base.block-decorative--light {
+        @apply
+        bg-primary-50
+    }
+
+    .block-decorative-base.block-decorative--light .content-text h3 {
+        @apply
+        text-primary-500
+    }
+
+    /* NMOSD x Esclerose Múltipla */
+
+    .section-nmosd-x-esclerose-multipla {
+        @apply
+        psection
+    }
+
+    /* Gráfico Radial */
+
+    .radial-chart {
+        @apply
+        relative inline-flex items-center justify-center;
+        width: 80px;
+        height: 80px;
+    }
+
+    .radial-chart svg {
+        @apply
+        absolute inset-0;
+        width: 80px;
+        height: 80px;
+        transform: rotate(-90deg); /* Inicia do topo */
+    }
+
+    .radial-chart .circle-bg {
+        fill: none;
+        stroke: #CBE1F2; /* Cor da borda clara completa */
+        stroke-width: 4;
+        cx: 40;
+        cy: 40;
+        r: 36;
+    }
+
+    .radial-chart .circle-progress {
+        fill: none;
+        stroke: #679FD3; /* Cor da borda azul (progresso) */
+        stroke-width: 4;
+        cx: 40;
+        cy: 40;
+        r: 36;
+        stroke-dasharray: 226.2; /* Circunferência: 2 * π * 36 ≈ 226.2 */
+        stroke-dashoffset: 226.2; /* Inicia sem progresso */
+    }
+
+    .radial-chart .percentage {
+        @apply
+        absolute inset-0 flex items-center justify-center
+        font-bold ml:text-lg text-base
+        text-primary-500 z-10;
+    }
+
+    .radial-chart .percentage .percentage-text {
+        @apply
+        text-sm;
+    }
+
+    /* Gráfico Pizza */
+    
+    .pie-chart {
+        @apply
+        relative inline-flex items-center justify-center;
+        width: 80px;
+        height: 80px;
+    }
+
+    .pie-chart svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Tabelas */
+
+    .table-ui {
+        @apply
+        w-full
+        ml:text-lg sm:text-base text-sm
+    }
+
+    .table-ui table {
+        @apply
+        w-full
+        rounded-t-2xl rounded-b-2xl overflow-hidden
+    }
+
+    .table-ui table th {
+        @apply
+        text-left text-neutral-50
+        sm:p-4 p-3 bg-primary-600 border-r border-primary-400 last:border-r-0
+    }
+
+    .table-ui table tbody {
+        @apply
+        bg-primary-50
+    }
+
+    .table-ui table tbody tr {
+        @apply
+        border-b border-primary-200 last:border-b-0
+    }
+
+    .table-ui table tbody tr td {
+        @apply
+        sm:p-4 p-3 border-r border-primary-200 last:border-r-0
+    }
+
+    /* Diagnóstico */
+
+    .section-diagnostico-da-nmosd {
+        @apply
+        bg-primary-500
+        psection overflow-hidden relative
+    }
+
+    .section-diagnostico-da-nmosd > .container {
+        @apply
+        relative z-20
+    }
+
+    .section-diagnostico-da-nmosd .textura-1 {
+        @apply
+        absolute top-0 left-0 w-full h-full z-10
+        bg-textura-1 bg-cover bg-center mix-blend-multiply
+    }
+    
+    .section-diagnostico-da-nmosd .shape-for-blur-1 {
+        @apply
+        absolute top-[140px] left-[52%] z-0
+    }
+    
+    .section-diagnostico-da-nmosd .shape-for-blur-1 img {
+        @apply
+        w-auto h-auto min-w-[1144px] blur-[200px]
+    }
+
+    /* Tratamento */
+
+    .section-tratamento-nmosd {
+        @apply
+        psection
+    }
+
+    /* Fisiopatologia */
+
+    .section-fisiopatologia-da-nmosd {
+        @apply
+        psection bg-primary-50
+    }
+
+    /* Portal Médico */
+
+    .section-portal-medico {
+        @apply
+        psection bg-kv bg-cover bg-center
+    }
+
+    /* Conteúdo Exclusivo */
+
+    .section-conteudo-exclusivo {
+        @apply
+        psection
+    }
+    
+    /* Listas */
+
+    .list-with-icons {
+        @apply
+        flex flex-col gap-3
+    }
+
+    .list-with-icons .list-item {
+        @apply
+        flex flex-row items-center gap-2
+    }
+
+    .list-with-icons .list-item .list-item-icon {
+        @apply
+        w-6 h-6 min-w-6 min-h-6
+    }
+
+    .list-with-icons .list-item .list-item-icon svg {
+        @apply
+        *:fill-neutrals-50
+    }
+
+    .list-with-icons .list-item .list-item-text {
+        @apply
+        ml:text-lg text-base
+    }
+
+    /* Tabs diagnóstico */
+
+    .tabs-diagnostico {
+        @apply
+        flex flex-col gap-6
+    }
+
+    .tabs-diagnostico .tabs-diagnostico-item {
+        @apply
+        hidden
+    }
+
+    .tabs-diagnostico .tabs-diagnostico-item.active {
+        @apply
+        block
+    }
+    
+    .tabs-diagnostico .tabs-diagnostico-nav {
+        @apply
+        flex flex-row items-center gap-4
+    }
+    
+    .tabs-diagnostico .tabs-diagnostico-nav-item button {
+        @apply
+        inline-flex
+        text-primary-100 ml:text-lg sm:text-base/normal text-base/none
+        font-semibold font-display
+        px-5 py-3
+        rounded-full
+        outline outline-primary-100 outline-1 -outline-offset-1
+        hover:bg-neutrals-950/5 transition-all duration-300
+    }
+
+    .tabs-diagnostico .tabs-diagnostico-nav-item button.active {
+        @apply
+        bg-primary-100 text-primary-500
+    }
+
+    .tabs-diagnostico .tabs-diagnostico-container {
+        @apply
+        flex flex-col
+        sm:px-6 px-4 py-6
+        bg-primary-50
+        rounded-2xl
+    }
+
+    .tabs-diagnostico .table-ui tbody {
+        @apply
+        bg-neutrals-50
+    }
+
+
+}
+
+@layer utilities {
+    .psection {
+        @apply
+        sm:py-20 py-16
+    }
+
+    .psection-top {
+        @apply
+        sm:pt-20 pt-16
+    }
+
+    .psection-bottom {
+        @apply
+        sm:pb-20 pb-16
+    }
+
+    /* Esconder scrollbar */
+    .scrollbar-hide {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari and Opera */
+    }
+}

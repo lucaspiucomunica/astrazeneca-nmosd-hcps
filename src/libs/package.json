@@ -1,0 +1,13 @@
+{
+  "name": "nmo-theme",
+  "version": "1.0.0",
+  "description": "Tema para o site sobre NMO da AstraZeneca",
+  "scripts": {
+    "dev": "npx tailwindcss -i ../css/input.css -o ../css/output.css",
+    "build:watch": "npx tailwindcss -i ../css/input.css -o ../css/output.css --watch",
+    "build:css": "npx tailwindcss -i ../css/input.css -o ../css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
