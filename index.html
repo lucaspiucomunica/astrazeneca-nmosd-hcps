@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NMOSD | AstraZeneca</title>
 
-    <link rel="stylesheet" href="src/css/output.css">
+    <link rel="stylesheet" href="src/css/output.min.css">
 </head>
 
 <body class="overflow-x-hidden">
@@ -73,7 +73,7 @@
                     <div class="content-text mb-6">
                         <h2>O que é NMOSD?</h2>
                         <p>A doença do espectro da neuromielite óptica (NMOSD) é uma <strong>condição rara autoimune</strong> caracterizada por astrocitopatia, em geral mediada por <strong>autoanticorpos antiaquaporina-4 (anti-AQP4)</strong> e pelo sistema complemento, com consequente desmielinização.<sup>1-3</sup></p>
-                        <p>As manifestações ocorrem em surtos recorrentes e imprevisíveis. A cada surto, pode haver danos neurológicos irreversíveis, e as chances de incapacidade ou morte aumentam.<sup>3,4</sup></p>
+                        <p>As manifestações ocorrem em <strong>surtos recorrentes e imprevisíveis</strong>. A cada surto, pode haver <strong>danos neurológicos irreversíveis</strong>, e as chances de incapacidade ou morte aumentam.<sup>3,4</sup></p>
                         <p>Por isso a principal meta de tratamento é evitar novos surtos.<sup>3,4</sup></p>
                     </div>
                     <div class="card-primary card-primary--row">
@@ -328,14 +328,6 @@
                                                                 <img src="src/icons/arrow-circle-right.svg" alt="" class="svg-inline">
                                                             </div>
                                                             <div class="tab-item-list-item-text">
-                                                                <p>Acuidade visual reduzida, de leve a grave<sup>1</sup></p>
-                                                            </div>
-                                                        </li>
-                                                        <li class="tab-item-list-item">
-                                                            <div class="tab-item-list-item-icon">
-                                                                <img src="src/icons/arrow-circle-right.svg" alt="" class="svg-inline">
-                                                            </div>
-                                                            <div class="tab-item-list-item-text">
                                                                 <p>Visão das cores alterada<sup>1</sup></p>
                                                             </div>
                                                         </li>
@@ -566,7 +558,9 @@
                             <div class="flex ml:flex-row flex-col-reverse items-center ms:gap-10 gap-6">
                                 <div class="ml:w-1/2 w-full">
                                     <div class="content-image content-image-rounded">
-                                        <img src="src/img/thumb-video-sintomas-desafios.webp" alt="">
+                                        <a href="https://www.azplay.com.br/app/content/principais-sintomas-e-desafios-da-nmosd" target="_blank" rel="noopener noreferrer">
+                                            <img src="src/img/thumb-video-sintomas-desafios.webp" alt="">
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="ml:w-1/2 w-full">
@@ -705,7 +699,7 @@
                         <div class="tabs-diagnostico-nav">
                             <div class="tabs-diagnostico-nav-item">
                                 <button class="active">
-                                    <span>Dosagem de anti-AQP410</span>
+                                    <span>Dosagem de anti-AQP4<sup>10</sup></span>
                                 </button>
                             </div>
                             <div class="tabs-diagnostico-nav-item">
@@ -981,12 +975,7 @@
         </div>
     </section>
 
-    <script src="src/js/dataLayer.js"></script>
-    <script src="src/js/svg-inline.js"></script>
-    <script src="src/js/gsap.min.js"></script>
-    <script src="src/js/ScrollTrigger.min.js"></script>
-    <script src="src/js/animation.js"></script>
-    <script src="src/js/main.js"></script>
+    <script src="src/js/bundle.min.js"></script>
 </body>
 
 </html>
